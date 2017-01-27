@@ -8,18 +8,23 @@ public class DuckSimulator {
 
 	public static void main(String[] args) {
 		DuckSimulator simulator = new DuckSimulator();
-		simulator.simulate();
+		
+		AbstractDuckFactory duckFactory = new CountingDuckFactory();
+		
+		simulator.simulate(duckFactory);
 	}
 
-	void simulate() {
-		Quackable mallardDuck = new QuackCounter(new MallardDuck());
-		Quackable redheadDuck = new QuackCounter(new RedheadDuck());
-		Quackable duckCall = new QuackCounter(new DuckCall());
-		Quackable rubberDuck = new QuackCounter(new RubberDuck());
+	void simulate(AbstractDuckFactory duckFactory) {
+		// 使用“带计数器”的工厂生产的鸭子都会有计数器
+		// 不会出现遗漏的情况
+		Quackable mallardDuck = duckFactory.createMallardDuck();
+		Quackable redheadDuck = duckFactory.createRedheadDuck();
+		Quackable duckCall = duckFactory.createDuckCall();
+		Quackable rubberDuck = duckFactory.createRubberDuck();
 		// 不统计鹅叫的次数
 		Quackable gooseDuck = new GooseAdapter(new Goose());
 
-		System.out.println("**** 带有计数器的模拟器  ***\n");
+		System.out.println("**** 带有鸭子工厂的模拟器  ***\n");
 
 		simulate(mallardDuck);
 		simulate(redheadDuck);
