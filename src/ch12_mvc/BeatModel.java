@@ -7,9 +7,9 @@ import javax.sound.midi.*;
 public class BeatModel implements IBeatModel, MetaEventListener {
 	Sequencer sequencer;
 	// 节拍观察者
-	ArrayList<IBeatObserver> IBeatObservers = new ArrayList<IBeatObserver>();
+	ArrayList<IBeatObserver> beatObservers = new ArrayList<IBeatObserver>();
 	// BPM观察者
-	ArrayList<IBPMObserver> IBPMObservers = new ArrayList<IBPMObserver>();
+	ArrayList<IBPMObserver> bpmObservers = new ArrayList<IBPMObserver>();
 	// 默认BPM 90
 	int bpm = 90;
 	Sequence sequence;
@@ -47,41 +47,41 @@ public class BeatModel implements IBeatModel, MetaEventListener {
 
 
 	public void registerObserver(IBeatObserver o) {
-		IBeatObservers.add(o);
+		beatObservers.add(o);
 	}
 
 	public void notifyIBeatObservers() {
-		for(int i = 0; i < IBeatObservers.size(); i++) {
-			IBeatObserver observer = (IBeatObserver)IBeatObservers.get(i);
+		for(int i = 0; i < beatObservers.size(); i++) {
+			IBeatObserver observer = (IBeatObserver)beatObservers.get(i);
 			observer.updateBeat();
 		}
 	}
 
 	public void registerObserver(IBPMObserver o) {
-		IBPMObservers.add(o);
+		bpmObservers.add(o);
 	}
 
 	public void notifyIBPMObservers() {
-		for(int i = 0; i < IBPMObservers.size(); i++) {
-			IBPMObserver observer = (IBPMObserver)IBPMObservers.get(i);
+		for(int i = 0; i < bpmObservers.size(); i++) {
+			IBPMObserver observer = (IBPMObserver)bpmObservers.get(i);
 			observer.updateBPM();
 		}
 	}
 
 
 	public void removeObserver(IBeatObserver o) {
-		int i = IBeatObservers.indexOf(o);
+		int i = beatObservers.indexOf(o);
 		if (i >= 0) {
-			IBeatObservers.remove(i);
+			beatObservers.remove(i);
 		}
 	}
 
 
 
 	public void removeObserver(IBPMObserver o) {
-		int i = IBPMObservers.indexOf(o);
+		int i = bpmObservers.indexOf(o);
 		if (i >= 0) {
-			IBPMObservers.remove(i);
+			bpmObservers.remove(i);
 		}
 	}
 
