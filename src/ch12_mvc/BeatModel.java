@@ -35,6 +35,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
 		this.bpm = bpm;
 		sequencer.setTempoInBPM(getBPM());
 		notifyIBPMObservers();
+		notifyIBeatObservers();
 	}
 
 	public int getBPM() {
@@ -65,6 +66,7 @@ public class BeatModel implements IBeatModel, MetaEventListener {
 		for(int i = 0; i < bpmObservers.size(); i++) {
 			IBPMObserver observer = (IBPMObserver)bpmObservers.get(i);
 			observer.updateBPM();
+			System.out.println("notifyIBPMObservers");
 		}
 	}
 

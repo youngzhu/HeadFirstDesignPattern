@@ -39,5 +39,6 @@ public class BeatController implements IController {
   
  	public void setBPM(int bpm) {
 		model.setBPM(bpm);
+		System.out.println("setBPM::" + bpm);
 	}
 }

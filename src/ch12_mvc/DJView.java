@@ -164,6 +164,7 @@ public class DJView implements ActionListener, IBeatObserver, IBPMObserver {
 	}
   
 	public void updateBeat() {
+		System.out.println("updateBeat::" + beatBar);
 		if (beatBar != null) {
 			 beatBar.setValue(100);
 		}
